@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Location Detection</title>
+    <!-- Include Google Maps API script with your API key -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtvzeh9Pc9MshH2bMSQ09hbWDYgR58vLk"></script>
+</head>
+<body>
+    <h1>Submit Your Location</h1>
+    <form id="locationForm" action="YOUR_GOOGLE_FORM_URL" method="POST">
+        <input type="hidden" name="entry.1234567890" id="locationInput"> <!-- Replace with your Google Form field ID -->
+        <button type="submit">Submit</button>
+    </form>
+    <script>
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+
+        function showPosition(position) {
+            var lat = position.coords.latitude;
+            var lon = position.coords.longitude;
+            var location = lat + ', ' + lon;
+            document.getElementById('locationInput').value = location;
+            document.getElementById('locationForm').submit();
+        }
+
+        function showError(error) {
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    alert("User denied the request for Geolocation.");
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    alert("Location information is unavailable.");
+                    break;
+                case error.TIMEOUT:
+                    alert("The request to get user location timed out.");
+                    break;
+                case error.UNKNOWN_ERROR:
+                    alert("An unknown error occurred.");
+                    break;
+            }
+        }
+
+        // Automatically call getLocation when the page loads
+        window.onload = getLocation;
+    </script>
+</body>
+</html>
