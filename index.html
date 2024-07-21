@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Submit Your Location</h1>
-    <form id="locationForm" action="https://forms.gle/mruafR3Y7ShbxQQJA" method="POST">
+    <form id="locationForm" action="YOUR_GOOGLE_FORM_URL" method="POST">
         <input type="hidden" name="entry.1234567890" id="locationInput"> <!-- Replace with your Google Form field ID -->
         <button type="submit">Submit</button>
     </form>
@@ -25,6 +25,10 @@
             var lon = position.coords.longitude;
             var location = lat + ', ' + lon;
             document.getElementById('locationInput').value = location;
+
+            // Debugging: Log location to the console
+            console.log("Detected location: " + location);
+
             document.getElementById('locationForm').submit();
         }
 
